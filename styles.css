@@ -1,4 +1,4 @@
- :root {
+:root {
             --navy: #1F3A93;
             --white: #FFFFFF;
             --beige: #F5F2ED;
@@ -54,6 +54,7 @@
             transition: all 0.3s ease;
             border: none;
             cursor: pointer;
+            text-align: center;
         }
         
         .btn:hover {
@@ -113,6 +114,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
         }
         
         .logo {
@@ -120,11 +122,13 @@
             font-size: 24px;
             font-weight: 700;
             color: var(--navy);
+            z-index: 1001;
         }
         
         .nav-links {
             display: flex;
             list-style: none;
+            transition: transform 0.3s ease, opacity 0.3s ease;
         }
         
         .nav-links li {
@@ -166,6 +170,7 @@
             border: none;
             font-size: 24px;
             color: var(--navy);
+            z-index: 1001;
         }
         
         /* Hero Section */
@@ -199,16 +204,17 @@
         }
         
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
             margin-bottom: 20px;
             color: var(--white);
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
         
         .hero p {
-            font-size: 1.5rem;
+            font-size: clamp(1.1rem, 2.5vw, 1.5rem);
             margin-bottom: 40px;
             opacity: 0.9;
+            line-height: 1.4;
         }
         
         .hero-buttons {
@@ -216,6 +222,12 @@
             justify-content: center;
             gap: 15px;
             flex-wrap: wrap;
+        }
+        
+        /* Responsive Images */
+        img {
+            max-width: 100%;
+            height: auto;
         }
         
         .profile-img {
@@ -247,6 +259,8 @@
             margin: 0 auto;
             letter-spacing: .15em;
             animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+            display: inline-block;
+            max-width: 100%;
         }
         
         @keyframes typing {
@@ -1001,24 +1015,43 @@
             .nav-links {
                 position: fixed;
                 top: 70px;
-                left: -100%;
+                left: 0;
                 width: 100%;
-                height: calc(100vh - 70px);
+                height: 0;
                 background: var(--white);
                 flex-direction: column;
                 align-items: center;
-                justify-content: center;
+                justify-content: flex-start;
                 transition: all 0.3s ease;
                 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+                z-index: 1000;
             }
             
             .nav-links.active {
-                left: 0;
+                height: calc(100vh - 70px);
+                padding-top: 30px;
             }
             
             .nav-links li {
                 margin: 15px 0;
+                opacity: 0;
+                transform: translateY(-20px);
+                transition: opacity 0.3s ease, transform 0.3s ease;
             }
+            
+            .nav-links.active li {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            
+            .nav-links li:nth-child(1) { transition-delay: 0.1s; }
+            .nav-links li:nth-child(2) { transition-delay: 0.2s; }
+            .nav-links li:nth-child(3) { transition-delay: 0.3s; }
+            .nav-links li:nth-child(4) { transition-delay: 0.4s; }
+            .nav-links li:nth-child(5) { transition-delay: 0.5s; }
+            .nav-links li:nth-child(6) { transition-delay: 0.6s; }
+            .nav-links li:nth-child(7) { transition-delay: 0.7s; }
             
             .hamburger {
                 display: block;
@@ -1032,6 +1065,7 @@
                 width: 100%;
                 padding-left: 50px;
                 padding-right: 0;
+                justify-content: flex-start;
             }
             
             .timeline-item:nth-child(even) {
@@ -1054,6 +1088,28 @@
             
             .about-image-container {
                 height: 350px;
+            }
+            
+            .projects-grid,
+            .certificates-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            .typewriter {
+                white-space: normal;
+                border-right: none;
+                animation: none;
+                display: block;
             }
         }
         
@@ -1088,5 +1144,78 @@
             
             .about-image-container {
                 height: 300px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .typewriter {
+                font-size: 1.1rem;
+                line-height: 1.4;
+            }
+        }
+
+        @media (max-width: 425px) {
+            .hero {
+                padding: 150px 0 80px;
+            }
+            
+            .profile-img {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 0.9rem;
+            }
+            
+            .typewriter {
+                font-size: 1rem;
+            }
+            
+            .hero-buttons .btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 375px) {
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            
+            .hero p {
+                font-size: 0.85rem;
+            }
+            
+            .typewriter {
+                font-size: 0.95rem;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+            
+            .hero p {
+                font-size: 0.8rem;
+            }
+            
+            .typewriter {
+                font-size: 0.9rem;
+            }
+            
+            .container {
+                padding: 0 10px;
             }
         }
