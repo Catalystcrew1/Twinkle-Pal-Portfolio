@@ -151,7 +151,6 @@
                             formSuccess.style.display = 'none';
                         }, 5000);
                     } else {
-                        throw new Error('Form submission failed');
                     }
                 } catch (error) {
                     alert('There was a problem sending your message. Please try again later.');
